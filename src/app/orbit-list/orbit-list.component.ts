@@ -14,8 +14,6 @@ export class OrbitListComponent implements OnInit {
 
   @Input() satellites: Satellite[];
 
-  rowColor: Generator = this.getRowColor();
-
   constructor() { }
 
   ngOnInit() {
@@ -31,14 +29,5 @@ export class OrbitListComponent implements OnInit {
 			}
 			return 0;
 		});
-	}
-
-	*getRowColor(): Generator {
-		const first = "#d8d8d8";
-		const second = "#a2f5a2";
-		while(true){
-			yield first;
-			yield second;
-		}
 	}
 }

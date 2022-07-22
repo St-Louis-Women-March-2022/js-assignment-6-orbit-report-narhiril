@@ -6,7 +6,7 @@
         <th>Orbit Type</th>
         <th>Launch Date</th>
     </tr>
-    <tr class="data-row" *ngFor="let satellite of satellites" [style.background]="rowColor.next().value">
+    <tr class="data-row" *ngFor="let satellite of satellites; index as rowNumber" [style.background]="rowNumber % 2 === 0 ? '#d8d8d8' : '#a2e5a2'">
         <td>{{satellite.name}}</td>
         <td [class.warning]="satellite.isSpaceDebris()">{{satellite.type}}</td>
         <td>{{satellite.operational}}</td>
@@ -14,7 +14,4 @@
         <td>{{satellite.launchDate}}</td>
     </tr>
 </table>
-
-<!-- TODO 2b: use *ngFor to display satellite data in the table -->
-<!-- TODO 3b: add style directive to conditionally highlight satellite type -->
 
