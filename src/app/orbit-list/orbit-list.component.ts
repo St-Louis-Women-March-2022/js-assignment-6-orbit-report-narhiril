@@ -1,3 +1,5 @@
+import { getLocaleFirstDayOfWeek } from '@angular/common';
+import { StylesCompileDependency } from '@angular/compiler';
 import { Component, OnInit, Input } from '@angular/core';
 import { Satellite } from '../satellite';
 
@@ -7,9 +9,13 @@ import { Satellite } from '../satellite';
   styleUrls: ['./orbit-list.component.css']
 })
 
+
 export class OrbitListComponent implements OnInit {
 
   @Input() satellites: Satellite[];
+
+  rowColor: Generator = this.getRowColor();
+
   constructor() { }
 
   ngOnInit() {
@@ -27,4 +33,12 @@ export class OrbitListComponent implements OnInit {
 		});
 	}
 
+	*getRowColor(): Generator {
+		const first = "#d8d8d8";
+		const second = "#a2f5a2";
+		while(true){
+			yield first;
+			yield second;
+		}
+	}
 }
