@@ -27,5 +27,15 @@ export class OrbitCountsComponent implements OnInit {
 	return count;
  }
 
+ getTypes(): string[] {
+	let foundTypes: string[] = [];
+	for (const satellite of this.satellites){
+		if (!foundTypes.includes(satellite.type)){
+			foundTypes.push(satellite.type);
+		}
+	}
+	return foundTypes.sort();
+ }
+
 
 }
