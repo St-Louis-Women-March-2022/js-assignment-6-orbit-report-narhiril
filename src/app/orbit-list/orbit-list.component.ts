@@ -1,5 +1,3 @@
-import { getLocaleFirstDayOfWeek } from '@angular/common';
-import { StylesCompileDependency } from '@angular/compiler';
 import { Component, OnInit, Input } from '@angular/core';
 import { Satellite } from '../satellite';
 
@@ -31,3 +29,4 @@ export class OrbitListComponent implements OnInit {
 		});
 	}
 }
+
