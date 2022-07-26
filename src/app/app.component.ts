@@ -58,13 +58,13 @@ export class AppComponent {
 	advancedSearch(searchTerm: string): void { //new implementation for bonus misson
 		const matchingSatellites: Satellite[] = [];
 		const escapedSearchTerm = escapeStringRegexp(searchTerm);
-		const matchExpression = new RegExp(escapedSearchTerm, "i");
-		for(const satellite of this.sourceList){
+		const matchExpression = new RegExp(escapedSearchTerm, "i"); //match substring, case insensitive
+		for(const satellite of this.sourceList) {
 			for (const property in satellite) { 
 				if (
-					typeof property === "string" //name, type, launchDate, or orbitType
+					typeof satellite[property] === "string" //name, type, launchDate, or orbitType
 					&& !matchingSatellites.includes(satellite)
-					&& matchExpression.test(satellite[property]) //match substring, case insensitive
+					&& matchExpression.test(satellite[property]) 
 				) {
 					matchingSatellites.push(satellite);
 				}
