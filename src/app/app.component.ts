@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Satellite } from './satellite';
+import escapeStringRegexp from 'escape-string-regexp';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +39,8 @@ export class AppComponent {
 	}
 
 	search(searchTerm: string): void {
+		this.advancedSearch(searchTerm);
+		/* //original implementation
 		let matchingSatellites: Satellite[] = [];
 		searchTerm = searchTerm.toLowerCase();
 		for(let i=0; i < this.sourceList.length; i++) {
@@ -49,7 +52,25 @@ export class AppComponent {
 		// assign this.displayList to be the array of matching satellites
 		// this will cause Angular to re-make the table, but now only containing matches
 		this.displayList = matchingSatellites;
+		*/
 	}
 
+	advancedSearch(searchTerm: string): void { //new implementation for bonus misson
+		const matchingSatellites: Satellite[] = [];
+		const escapedSearchTerm = escapeStringRegexp(searchTerm);
+		const matchExpression = new RegExp(escapedSearchTerm, "i"); //match substring, case insensitive
+		for(const satellite of this.sourceList) {
+			for (const property in satellite) { 
+				if (
+					typeof satellite[property] === "string" //name, type, launchDate, or orbitType
+					&& !matchingSatellites.includes(satellite)
+					&& matchExpression.test(satellite[property]) 
+				) {
+					matchingSatellites.push(satellite);
+				}
+			}
+		}
+		this.displayList = matchingSatellites;
+	}
 
 }
