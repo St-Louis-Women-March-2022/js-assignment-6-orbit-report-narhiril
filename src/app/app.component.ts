@@ -62,11 +62,12 @@ export class AppComponent {
 		for(const satellite of this.sourceList) {
 			for (const property in satellite) { 
 				if (
-					typeof satellite[property] === "string" //name, type, launchDate, or orbitType
-					&& !matchingSatellites.includes(satellite)
+					satellite.hasOwnProperty(property) //libraries can modify Object.prototype, so this check looks useless, but is apparently important - TIL
+					&& typeof satellite[property] === "string" //name, type, launchDate, or orbitType
 					&& matchExpression.test(satellite[property]) 
 				) {
 					matchingSatellites.push(satellite);
+					break; //to prevent duplicate matches
 				}
 			}
 		}
